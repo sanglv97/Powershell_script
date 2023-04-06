@@ -39,8 +39,8 @@ Write-Host ========> BAT DAU TAO TAI KHOAN
   $emailAddress = $email.ToLower() | % {Remove-Diacritics $_}
   $samAccountName = $emailAddress.Split('@')[0]
   $userPrincipalName = "$samAccountName@$domain"
-  $password = Read-Host "HAY NHAP MAT KHAU" -AsSecureString
-  $accountPassword = $password | ConvertTo-SecureString -AsPlainText -Force
+  $accountPassword = Read-Host "HAY NHAP MAT KHAU" -AsSecureString
+  #$accountPassword = $password | ConvertTo-SecureString -AsPlainText -Force
   $description = "DAY LA TAI KHOAN $samAccountName"
   
   # option change password AtLogon
