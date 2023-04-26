@@ -33,7 +33,8 @@ Write-Host ========> BAT DAU TAO TAI KHOAN
   $domains = Read-Host "HAY NHAP DOMAIN AD"
   $domain = $domains.ToLower() | % {Remove-Diacritics $_}
   $name = $fullname.ToUpper() | % {Remove-Diacritics $_}
-  $firstname,$lastname = $name.Split(' ')
+  $firstname = $name.Substring(0, $name.LastIndexOf(" "))
+  $lastname = $name.Split()[-1]
   $givenName = [string]$firstname
   $surName = [string]$lastname
   $emailAddress = $email.ToLower() | % {Remove-Diacritics $_}
