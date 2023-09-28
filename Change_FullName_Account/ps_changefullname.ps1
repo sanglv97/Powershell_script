@@ -22,20 +22,19 @@ $rowCount = ($worksheet.UsedRange.Rows).Count
 for ($i=2; $i -le $rowCount; $i++) {
     # Get the values from the current row
     $username = $worksheet.Cells.Item($i,1).Value2
-    $computername1 = $worksheet.Cells.Item($i,2).Value2
-    $computername2 = $worksheet.Cells.Item($i,3).Value2
-    $computername3 = $worksheet.Cells.Item($i,4).Value2
+    $fullname = $worksheet.Cells.Item($i,2).Value2
+
      
     if ($username -eq $null) {                               
         break                                                 
         }
-
-    # execute allow username login to workstation
-    Set-ADUser -Identity $username -LogonWorkstations "$computername1,$computername2,$computername3"
-    
-    # Check which client the username is being allowed to logonto
-    $check = Get-ADUser -Identity $username -Properties LogonWorkstations | Select-Object SamAccountName,LogonWorkstations
-    Write-Host "Allow User $username LogonTo :" $check.LogonWorkstations -ForegroundColor green
+     
+	# change Display name
+    Set-ADUser -Identity $username -DisplayName $fullname
+   
+    #check display name has changed
+	$check = Get-ADUser -Identity $username | Select-Object 
+    Write-Host "$username =>" $check.Surname -ForegroundColor green
 
 
 
